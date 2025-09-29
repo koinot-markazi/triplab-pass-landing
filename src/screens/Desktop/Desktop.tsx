@@ -19,15 +19,29 @@ export const Desktop = (): JSX.Element => {
       />
 
       <main className="flex flex-col w-full relative z-10">
-        <InformationSection />
+        <section id="main">
+          <InformationSection />
+        </section>
         <div className="flex flex-col items-center w-full">
-          <ServiceOverviewSection />
-          <TripPassSummarySection />
-          <PricingDetailsSection />
+          <section id="howItWorks">
+            <ServiceOverviewSection />
+          </section>
+          <section id="tripPass">
+            <TripPassSummarySection />
+          </section>
+          <section id="pricing">
+            <PricingDetailsSection />
+          </section>
         </div>
-        <FaqSection />
-        <ContactSection />
-        <OperatorListSection />
+        <section id="faq">
+          <FaqSection />
+        </section>
+        <section id="contacts">
+          <ContactSection />
+        </section>
+        <section id="partners">
+          <OperatorListSection />
+        </section>
       </main>
     </div>
     </LanguageProvider>

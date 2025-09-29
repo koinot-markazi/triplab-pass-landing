@@ -1,4 +1,3 @@
-import React from 'react';
 import { Desktop } from './screens/Desktop';
 import { Mobile } from './screens/Mobile';
 

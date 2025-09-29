@@ -88,7 +88,7 @@ export const PricingDetailsSection = (): JSX.Element => {
           {t('calculator.subtitle')}
         </p>
 
-        <div className="flex items-center gap-1.5 mt-[53px] ml-8">
+        <div className="flex items-center gap-1.5 mt-[53px]">
           <div className="[font-family:'SF_Pro-Bold',Helvetica] font-bold text-[#212121] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
             {t('calculator.tripsLabel')}
           </div>

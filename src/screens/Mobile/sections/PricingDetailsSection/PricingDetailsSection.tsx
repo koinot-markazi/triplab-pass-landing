@@ -1,160 +1,170 @@
-import React, { useState } from "react";
-import { useLanguage } from "../../../../contexts/LanguageContext";
-import { Card, CardContent } from "../../../../components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../../../../components/ui/table";
+import React, {useState} from "react";
+import {useLanguage} from "../../../../contexts/LanguageContext";
+import {Card, CardContent} from "../../../../components/ui/card";
 
 export const PricingDetailsSection = (): JSX.Element => {
-  const { t } = useLanguage();
-  const [selectedTrips, setSelectedTrips] = useState(2);
+    const {t} = useLanguage();
+    const [selectedTrips, setSelectedTrips] = useState(2);
 
-  const sliderNumbers = [
-    { value: 1, active: selectedTrips >= 1 },
-    { value: 2, active: selectedTrips >= 2 },
-    { value: 3, active: selectedTrips >= 3 },
-    { value: 4, active: selectedTrips >= 4 },
-    { value: 5, active: selectedTrips >= 5 },
-    { value: 6, active: selectedTrips >= 6 },
-    { value: 7, active: selectedTrips >= 7 },
-    { value: 8, active: selectedTrips >= 8 },
-    { value: 9, active: selectedTrips >= 9 },
-    { value: 10, active: selectedTrips >= 10 },
-    { value: 11, active: selectedTrips >= 11 },
-    { value: 12, active: selectedTrips >= 12 },
-  ];
+    const pricingData = [
+        {
+            plan: t('pricing.solo.title'),
+            price: "$80",
+            planPrice: 80,
+            tourCompanyPrice: 1000,
+            tourOperatorPrice: 930,
+            bgColor: "bg-white",
+            people: 1,
+        },
+        {
+            plan: t('pricing.duo.title'),
+            price: "$120",
+            planPrice: 120,
+            tourCompanyPrice: 2000,
+            tourOperatorPrice: 1860,
+            bgColor: "bg-[#91d8fc1a]",
+            people: 2,
+        },
+        {
+            plan: t('pricing.group.title'),
+            price: "$290",
+            planPrice: 290,
+            tourCompanyPrice: 4500,
+            tourOperatorPrice: 4185,
+            bgColor: "bg-white",
+            people: 5,
+        },
+    ];
 
-  const pricingData = [
-    {
-      plan: `${t('pricing.solo.title')} / $80`,
-      tourCompanyPrice: "$1000",
-      tourOperatorPrice: "$930",
-      savings: "+ $60",
-      bgColor: "bg-white",
-    },
-    {
-      plan: `${t('pricing.duo.title')} / $120`,
-      tourCompanyPrice: "$2000 / 2 kishiga",
-      tourOperatorPrice: "$1860 / 2 kishiga",
-      savings: "+ $160",
-      bgColor: "bg-[#91d8fc1a]",
-    },
-    {
-      plan: `${t('pricing.group.title')} / $290`,
-      tourCompanyPrice: "$4500 / 5 kishiga",
-      tourOperatorPrice: "$4185 / 5 kishiga",
-      savings: "+ $340",
-      bgColor: "bg-white",
-    },
-  ];
+    // Function to calculate savings (same as desktop version)
+    const calculateSavings = (row: typeof pricingData[0]) => {
+        const trips = selectedTrips;
+        // Savings calculated for each trip
+        const savings = (row.tourCompanyPrice * trips - row.tourOperatorPrice * trips) - row.planPrice;
+        return savings > 0 ? savings : 0;
+    };
 
-  const handleSliderClick = (value: number) => {
-    setSelectedTrips(value);
-  };
+    const handleIncrement = () => {
+        if (selectedTrips < 12) {
+            setSelectedTrips(selectedTrips + 1);
+        }
+    };
 
-  const getSliderPosition = () => {
-    return ((selectedTrips - 1) / 11) * 100;
-  };
+    const handleDecrement = () => {
+        if (selectedTrips > 1) {
+            setSelectedTrips(selectedTrips - 1);
+        }
+    };
 
-  return (
-    <Card className="w-full mx-4 bg-[#f8f8f8] rounded-[24px] overflow-hidden">
-      <CardContent className="p-4">
-        <h2 className="h-auto w-full text-center mt-0 [font-family:'SF_Pro-Bold',Helvetica] font-bold text-[#212121] text-2xl tracking-[0] leading-tight">
-          {t('calculator.title')}
-        </h2>
+    return (
+        <div className="w-full max-w-md mx-auto px-4">
+            <Card className="bg-[#f8f8f8] rounded-[24px] overflow-hidden shadow-sm">
+                <CardContent className="p-6">
+                    {/* Header */}
+                    <div className="text-center mb-6">
+                        <h2 className="text-xl font-bold text-[#212121] mb-2 [font-family:'SF_Pro-Bold',Helvetica]">
+                            {t('calculator.title')}
+                        </h2>
+                        <p className="text-sm text-[#212121cc] [font-family:'SF_Pro-Regular',Helvetica]">
+                            {t('calculator.subtitle')}
+                        </p>
+                    </div>
 
-        <p className="w-full text-center mt-2 [font-family:'SF_Pro-Regular',Helvetica] font-normal text-[#212121cc] text-sm tracking-[0] leading-relaxed">
-          {t('calculator.subtitle')}
-        </p>
+                    {/* Trip Counter */}
+                    <div className="text-center mb-8">
+                        <div className="text-sm font-medium text-[#212121] mb-1 [font-family:'SF_Pro-Bold',Helvetica]">
+                            {t('calculator.tripsLabel')}
+                        </div>
+                        <div
+                            className="text-xs text-[#212121cc] mb-4 opacity-60 [font-family:'SF_Pro-Regular',Helvetica]">
+                            {t('calculator.tripsUnit')}
+                        </div>
 
-        <div className="flex flex-col gap-1 mt-8">
-          <div className="[font-family:'SF_Pro-Bold',Helvetica] font-bold text-[#212121] text-xs tracking-[0] leading-[18px]">
-            {t('calculator.tripsLabel')}
-          </div>
-          <div className="opacity-[0.56] [font-family:'SF_Pro-Regular',Helvetica] font-normal text-[#212121] text-xs tracking-[0] leading-[18px]">
-            {t('calculator.tripsUnit')}
-          </div>
-        </div>
+                        <div className="flex items-center justify-center gap-8">
+                            <button
+                                onClick={handleDecrement}
+                                disabled={selectedTrips <= 1}
+                                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-lg font-bold text-[#212121] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                            >
+                                −
+                            </button>
 
-        <div className="relative w-full mt-4">
-          <div className="h-2.5 w-full bg-white rounded-[30px] relative">
-            <div
-              className="absolute top-0 left-0 h-2.5 bg-[#91d8fc] rounded-[30px] transition-all duration-200"
-              style={{ width: `${getSliderPosition()}%` }}
-            />
-            <button
-              className="absolute top-[-7px] w-6 h-6 bg-[#91d8fc] rounded-xl border-2 border-solid border-white cursor-pointer transition-all duration-200"
-              style={{ left: `calc(${getSliderPosition()}% - 12px)` }}
-              onClick={() => {}}
-            />
-          </div>
-        </div>
+                            <div
+                                className="text-3xl font-bold text-[#212121] min-w-[60px] text-center [font-family:'SF_Pro-Bold',Helvetica]">
+                                {selectedTrips}
+                            </div>
 
-        <div className="flex justify-between items-center w-full mt-2 px-2">
-          {sliderNumbers.filter((_, index) => index % 2 === 0).map((number) => (
-            <button
-              key={number.value}
-              onClick={() => handleSliderClick(number.value)}
-              className={`text-center [font-family:'SF_Pro-Regular',Helvetica] font-normal text-xs tracking-[0] leading-4 cursor-pointer ${
-                number.active ? "text-[#212121]" : "text-[#212121cc]"
-              }`}
-            >
-              {number.value}
-            </button>
-          ))}
-        </div>
+                            <button
+                                onClick={handleIncrement}
+                                disabled={selectedTrips >= 12}
+                                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-lg font-bold text-[#212121] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
 
-        <div className="w-full mt-6 rounded-2xl overflow-hidden overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-[#91d8fc] hover:bg-[#91d8fc]">
-                <TableHead className="px-2 py-2 [font-family:'SF_Pro-Bold',Helvetica] font-bold text-[#212121] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                  {t('calculator.table.subscription')}
-                </TableHead>
-                <TableHead className="px-2 py-2 [font-family:'SF_Pro-Bold',Helvetica] font-bold text-[#212121] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                  {t('calculator.table.tourCompany')}
-                </TableHead>
-                <TableHead className="px-2 py-2 [font-family:'SF_Pro-Bold',Helvetica] font-bold text-[#212121] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                  {t('calculator.table.tourOperator')}
-                </TableHead>
-                <TableHead className="px-2 py-2 text-right [font-family:'SF_Pro-Bold',Helvetica] font-bold text-[#212121] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                  {t('calculator.table.savings')}
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {pricingData.map((row, index) => (
-                <TableRow
-                  key={index}
-                  className={`${row.bgColor} hover:${row.bgColor}`}
-                >
-                  <TableCell className="px-2 py-2 [font-family:'SF_Pro-Semibold',Helvetica] font-normal text-[#212121] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                    {row.plan}
-                  </TableCell>
-                  <TableCell className="px-2 py-2">
-                    <span className="[font-family:'SF_Pro-Semibold',Helvetica] font-normal text-[#212121] text-xs tracking-[0] leading-[18px]">
-                      {row.tourCompanyPrice}
+                    {/* Pricing Cards */}
+                    <div className="space-y-3">
+                        {pricingData.map((item, index) => (
+                            <Card key={index} className={`${item.bgColor} border-0 shadow-sm`}>
+                                <CardContent className="p-4">
+                                    {/* Plan Header */}
+                                    <div className="flex justify-between items-center mb-3">
+                                        <h3 className="text-base font-semibold text-[#212121] [font-family:'SF_Pro-Semibold',Helvetica]">
+                                            {item.plan}
+                                        </h3>
+                                        <span
+                                            className="text-base font-bold text-[#212121] [font-family:'SF_Pro-Bold',Helvetica]">
+                      {item.price}
                     </span>
-                  </TableCell>
-                  <TableCell className="px-2 py-2">
-                    <span className="[font-family:'SF_Pro-Semibold',Helvetica] font-normal text-[#212121] text-xs tracking-[0] leading-[18px]">
-                      {row.tourOperatorPrice}
-                    </span>
-                  </TableCell>
-                  <TableCell className="px-2 py-2 text-right [font-family:'SF_Pro-Semibold',Helvetica] font-normal text-[#51b702] text-xs tracking-[0] leading-[18px] whitespace-nowrap">
-                    {row.savings}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                                    </div>
+
+                                    {/* Pricing Details */}
+                                    <div className="space-y-2">
+                                        <div className="flex justify-between items-center">
+                      <span className="text-xs text-[#212121] [font-family:'SF_Pro-Regular',Helvetica]">
+                        {t('calculator.table.tourCompany')}
+                      </span>
+                                            <span
+                                                className="text-xs font-medium text-[#212121] [font-family:'SF_Pro-Semibold',Helvetica]">
+                        ${item.tourCompanyPrice}
+                        {item.people > 1 && (
+                            <span className="text-[#212121cc]"> / {item.people} kishiga</span>
+                        )}
+                      </span>
+                                        </div>
+
+                                        <div className="flex justify-between items-center">
+                      <span className="text-xs text-[#212121] [font-family:'SF_Pro-Regular',Helvetica]">
+                        {t('calculator.table.tourOperator')}
+                      </span>
+                                            <span
+                                                className="text-xs font-medium text-[#212121] [font-family:'SF_Pro-Semibold',Helvetica]">
+                        ${item.tourOperatorPrice}
+                        {item.people > 1 && (
+                            <span className="text-[#212121cc]"> / {item.people} kishiga</span>
+                        )}
+                      </span>
+                                        </div>
+
+                                        <div
+                                            className="flex justify-between items-center pt-1 border-t border-gray-200">
+                      <span className="text-xs font-medium text-[#212121] [font-family:'SF_Pro-Semibold',Helvetica]">
+                        {t('calculator.table.savings')}
+                      </span>
+                                            <span
+                                                className="text-xs font-bold text-[#51b702] [font-family:'SF_Pro-Bold',Helvetica]">
+                        {calculateSavings(item) > 0 ? `+ $${calculateSavings(item)}` : "$0"}
+                      </span>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                </CardContent>
+            </Card>
         </div>
-      </CardContent>
-    </Card>
-  );
+    );
 };

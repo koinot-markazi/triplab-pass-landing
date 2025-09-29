@@ -107,7 +107,10 @@ export const FaqSection = (): JSX.Element => {
                       </p>
 
                       {faq.hasButton && (
-                        <Button className="inline-flex items-center justify-center gap-2.5 px-4 py-3 h-auto bg-[#91d8fc] rounded-[46px] shadow-medium hover:bg-[#7bc9f0] w-fit">
+                        <Button 
+                          onClick={() => window.open('https://t.me/triplab_bot', '_blank')}
+                          className="inline-flex items-center justify-center gap-2.5 px-4 py-3 h-auto bg-[#91d8fc] rounded-[46px] shadow-medium hover:bg-[#7bc9f0] w-fit"
+                        >
                           <span className="[font-family:'SF_Pro-Medium',Helvetica] font-medium text-[#212121] text-sm text-center tracking-[0] leading-[14px] whitespace-nowrap">
                             {faq.buttonText}
                           </span>
@@ -132,7 +135,10 @@ export const FaqSection = (): JSX.Element => {
             </p>
           </div>
 
-          <Button className="inline-flex items-center justify-center gap-2.5 px-4 py-3 h-auto bg-[#91d8fc] rounded-[46px] shadow-medium hover:bg-[#7bc9f0]">
+          <Button 
+            onClick={() => window.open('https://t.me/triplab_bot', '_blank')}
+            className="inline-flex items-center justify-center gap-2.5 px-4 py-3 h-auto bg-[#91d8fc] rounded-[46px] shadow-medium hover:bg-[#7bc9f0]"
+          >
             <span className="[font-family:'SF_Pro-Medium',Helvetica] font-medium text-[#212121] text-sm text-center tracking-[0] leading-[14px] whitespace-nowrap">
               {t('faq.contact')}
             </span>

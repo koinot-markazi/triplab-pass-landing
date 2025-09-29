@@ -3,6 +3,7 @@ import {
   MailIcon,
   MapPinIcon,
   PhoneIcon,
+  MessageCircleIcon,
 } from "lucide-react";
 import React from "react";
 import { useLanguage } from "../../../../contexts/LanguageContext";
@@ -24,12 +25,21 @@ export const ContactSection = (): JSX.Element => {
         "Toshkent, Uchtepa tumani, Farhod ko'chasi 23 kvartal 1B uy. (Saroy restorani yonida)",
       hasLink: true,
       linkText: t('contact.googleMaps'),
+      linkUrl: "https://maps.app.goo.gl/9mpTaomPBvx7xKPL7",
     },
     {
       icon: MailIcon,
       title: t('contact.email'),
       content: "triplabtour@gmail.com",
       hasLink: false,
+    },
+    {
+      icon: MessageCircleIcon,
+      title: "Telegram Bot",
+      content: "Sayohatlaringizdan tejash uchun bot",
+      hasLink: true,
+      linkText: "Telegram-botga o'tish",
+      linkUrl: "https://t.me/triplab_bot",
     },
   ];
 
@@ -63,15 +73,19 @@ export const ContactSection = (): JSX.Element => {
                   </div>
                 </div>
 
-                {item.hasLink && (
+                {item.hasLink && item.linkUrl && (
                   <div className="inline-flex flex-col items-start gap-4 relative flex-[0_0_auto]">
-                    <div className="inline-flex items-center justify-center gap-2 relative flex-[0_0_auto] cursor-pointer">
-                      <div className="relative w-fit [font-family:'Roboto',Helvetica] font-normal text-black text-sm tracking-[0] leading-relaxed">
+                    <a
+                      href={item.linkUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 relative flex-[0_0_auto] cursor-pointer"
+                    >
+                      <div className="relative w-fit [font-family:'Roboto',Helvetica] font-normal text-black text-sm tracking-[0] leading-relaxed underline">
                         {item.linkText}
                       </div>
-
                       <ChevronRightIcon className="relative w-5 h-5" />
-                    </div>
+                    </a>
                   </div>
                 )}
               </div>

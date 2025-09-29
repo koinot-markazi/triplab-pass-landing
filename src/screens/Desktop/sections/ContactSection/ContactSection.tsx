@@ -3,6 +3,7 @@ import {
   MailIcon,
   MapPinIcon,
   PhoneIcon,
+  MessageCircleIcon,
 } from "lucide-react";
 import React from "react";
 import { useLanguage } from "../../../../contexts/LanguageContext";
@@ -31,6 +32,14 @@ export const ContactSection = (): JSX.Element => {
       title: t('contact.email'),
       content: "triplabtour@gmail.com",
       hasLink: false,
+    },
+    {
+      icon: MessageCircleIcon,
+      title: "Telegram Bot",
+      content: "Sayohatlaringizdan tejash uchun bot",
+      hasLink: true,
+      linkText: "Telegram-botga o'tish",
+      linkUrl: "https://t.me/triplab_bot",
     },
   ];
 
