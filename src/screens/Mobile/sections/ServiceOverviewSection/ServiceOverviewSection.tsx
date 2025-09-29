@@ -79,6 +79,7 @@ export const ServiceOverviewSection = (): JSX.Element => {
               <Button
                 className={`w-full h-auto ${plan.buttonColor} hover:opacity-90 text-[#212121] rounded-[46px] px-4 py-3`}
                 variant="ghost"
+                onClick={() => window.open('https://t.me/triplab_bot', '_blank')}
               >
                 <span className="[font-family:'SF_Pro-Medium',Helvetica] font-medium text-sm text-center tracking-[0] leading-[14px]">
                   {plan.buttonText}

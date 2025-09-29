@@ -168,7 +168,9 @@ export const InformationSection = (): JSX.Element => {
                     </div>
 
                     <Button
-                        className="inline-flex bg-white shadow-medium items-center justify-center gap-2.5 px-4 py-3 rounded-[46px] h-auto hover:bg-gray-50 transition-colors">
+                        className={"inline-flex bg-white shadow-medium items-center justify-center gap-2.5 px-4 py-3 rounded-[46px] h-auto hover:bg-gray-50 transition-colors"}
+                        onClick={() => window.open('https://t.me/triplab_bot', '_blank')}
+                        >
                         <div
                             className="[font-family:'SF_Pro-Medium',Helvetica] font-medium text-[#212121] text-sm text-center tracking-[0] leading-[14px] whitespace-nowrap">
                             {t('hero.cta')}

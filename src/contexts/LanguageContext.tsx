@@ -24,7 +24,7 @@ const translations = {
     'hero.title': 'Arzon narxlarda sayohat qiling',
     'hero.subtitle': 'Bizning obunalar bilan xar sayohatingizdan yiliga',
     'hero.savings': '$60dan +$1000gacha tejab qoling',
-    'hero.cta': 'Bu qanday ishlaydi',
+    'hero.cta': 'Obunani ulash',
     
     // How it works section
     'howItWorks.title': 'Bu qanday ishlaydi?',
@@ -106,7 +106,7 @@ const translations = {
     'hero.title': 'Путешествуйте по доступным ценам',
     'hero.subtitle': 'С нашими подписками экономьте на каждом путешествии в год',
     'hero.savings': 'от $60 до +$1000',
-    'hero.cta': 'Как это работает',
+    'hero.cta': 'Подключить подписку',
     
     // How it works section
     'howItWorks.title': 'Как это работает?',
