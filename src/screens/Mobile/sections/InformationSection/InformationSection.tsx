@@ -110,7 +110,7 @@ export const InformationSection = (): JSX.Element => {
                             {t('hero.title')}
                         </h1>
                         <div
-                            className="py-[3px] px-[8px] bg-[#E9FF43] top-[35px] left-[50px] rotate-[-10deg] text-[#212121] text-[12px] max-w-[88px] absolute font-bold rounded-[46px] ">
+                            className="py-[3px] px-[8px] bg-[#E9FF43] top-[35px] left-[50px] rotate-[-10deg] text-[#212121] text-[12px] max-w-[188px] absolute font-bold rounded-[46px] ">
                             {t('hero.badge')}
                         </div>
                         <div
@@ -176,4 +176,5 @@ export const InformationSection = (): JSX.Element => {
             </div>
         </section>
     );
+
 };
